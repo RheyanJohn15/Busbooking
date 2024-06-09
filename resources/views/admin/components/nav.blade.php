@@ -130,11 +130,14 @@
                             <a class="dropdown-item d-flex align-items-center py-2" href="account-settings.html"><i
                                     class="icon-settings fs-4 me-3"></i>Account
                                 Settings</a>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="login.html"><i
-                                    class="icon-log-out fs-4 me-3"></i>Logout</a>
+                            <button class="dropdown-item d-flex align-items-center py-2" onclick="Admin.Logout('{{route('adminLogout')}}', '{{route('loginAdmin')}}')"><i
+                                    class="icon-log-out fs-4 me-3"></i>Logout</button>
                         </div>
                     </div>
 
+                    <form method="POST" id="logoutForm">
+                        @csrf
+                    </form>
                     <!-- Toggle Menu starts -->
                     <button class="btn btn-success btn-sm ms-3 d-lg-none d-md-block" type="button"
                         data-bs-toggle="offcanvas" data-bs-target="#MobileMenu">
@@ -168,11 +171,11 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         
              
-                <li class="nav-item  active-link">
-                    <a class="nav-link" href="clients.html"> Dashboard </a>
+                <li class="nav-item {{$active === 'dashboard' ? 'active-link' : ''}}">
+                    <a class="nav-link" href="{{route('adminDashboard')}}"> Dashboard </a>
                 </li>
               
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown {{$active === 'booking' ? 'active-link' : ''}}">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Booking
@@ -194,13 +197,16 @@
                         
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="clients.html"> Bus List </a>
+                <li class="nav-item {{$active === 'terminal' ? 'active-link' : ''}}">
+                    <a class="nav-link" href="{{route('adminTerminal')}}"> Terminal List </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="clients.html"> Routes </a>
+                <li class="nav-item {{$active === 'bus' ? 'active-link' : ''}}" >
+                    <a class="nav-link" href="{{route('adminBus')}}"> Bus List </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{$active === 'routes' ? 'active-link' : ''}}">
+                    <a class="nav-link" href="{{route('adminRoute')}}"> Routes </a>
+                </li>
+                <li class="nav-item {{$active === 'customers' ? 'active-link' : ''}}">
                     <a class="nav-link" href="clients.html"> Customer </a>
                 </li>
              

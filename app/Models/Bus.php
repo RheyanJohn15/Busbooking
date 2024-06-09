@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Admin extends Model
+class Bus extends Model
 {
     use HasFactory;
-    protected $table = 'tbl_admin';
-    protected $primaryKey = 'admin_id';
+    protected $table = 'tbl_bus';
+    protected $primaryKey = 'bus_id';
     protected $fillable = [
-     'admin_name',
-     'admin_username',
-     'admin_password',
-     'admin_pic'
+     'bus_code',
+     'bus_type',
+     'bus_seats',
+     'bus_status'
     ];
 }

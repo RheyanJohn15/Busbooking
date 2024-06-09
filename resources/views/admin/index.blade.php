@@ -14,7 +14,7 @@
 			<!-- App container starts -->
 			<div class="app-container">
 
-				@include('admin.components.nav')
+				@include('admin.components.nav', ['active'=>'dashboard'])
 
 				<!-- App body starts -->
 				<div class="app-body">
@@ -30,7 +30,7 @@
 								<ol class="breadcrumb mb-3">
 									<li class="breadcrumb-item">
 										<i class="icon-house_siding lh-1"></i>
-										<a href="index.html" class="text-decoration-none">Home</a>
+										<a href="{{route('adminDashboard')}}" class="text-decoration-none">Home</a>
 									</li>
 									<li class="breadcrumb-item">Pages</li>
 									<li class="breadcrumb-item text-light">Starter Page</li>
