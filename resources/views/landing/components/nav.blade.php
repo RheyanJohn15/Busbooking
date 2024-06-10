@@ -4,13 +4,13 @@
         <div class="col-12">
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
-            <a href="index.html" class="logo">
+            <a href="{{route('home')}}" class="logo">
             </a>
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
-              <li><a href="index.html" class="active">Home</a></li>
-              <li><a href="category.html">Category</a></li>
+              <li><a href="{{route('home')}}" class="active">Home</a></li>
+              <li><a href="category.html">Routes</a></li>
               <li><a href="listing.html">Booking</a></li>
               <li><a href="contact.html">Contact Us</a></li> 
               <li><div class="main-white-button"><a href="#"><i class="fa fa-plus"></i> Reserve a seat </a></div></li> 

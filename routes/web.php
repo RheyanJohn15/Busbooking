@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminDashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Authenticate;
+use App\Http\Controllers\CustomerDash;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +15,11 @@ use App\Http\Controllers\Authenticate;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-//Landing Routes
+//Client Routes FrontEnd
 Route::get('/', function () {return view('landing.index');})->name('home');
 
+//Client Routes BackEnd
+Route::post('/searchroute', [CustomerDash::class, 'SearchRoute'])->name('searchRoute');
 
 //Admin Routes Frontend
 Route::get('/admin/login', function () {return view('admin.login');})->name('loginAdmin');

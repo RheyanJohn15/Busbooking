@@ -276,16 +276,20 @@ header
 }
 
 .header-area .main-nav a.logo {
-  background-image: url(../images/white-logo.png);
-  width: 166px;
+  background-image: url(../../../assets/images/logo-text.png);
+  width: 70px;
   height: 58px;
   display: inline-block;
+  background-position: center;
+  background-size: cover;
   margin-top: 20px;
 }
 
 .background-header .main-nav a.logo {
-  background-image: url(../images/black-logo.png);
-  width: 164px;
+  background-image: url(../../../assets/images/logo-text.png);
+  width: 70px;
+  background-position: center;
+  background-size: cover;
   height: 58px;
   display: inline-block;
   margin-top: 10px;
@@ -2060,8 +2064,10 @@ responsive
     color: transparent;
   }
   .header-area .main-nav a.logo {
-    background-image: url(../images/black-logo.png);
+    background-image: url(../../../assets/images/logo.png);
     float: left;
+    background-position: center;
+    background-size: cover;
   }
   .header-area .logo {
     margin-left: 0px;
