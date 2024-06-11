@@ -17,9 +17,14 @@ use App\Http\Controllers\CustomerDash;
 */
 //Client Routes FrontEnd
 Route::get('/', function () {return view('landing.index');})->name('home');
+Route::get('/booking', function () {return view('landing.booking');})->name('booking');
+Route::get('/routes', [CustomerDash::class, 'Routes'])->name('routes');
+Route::get('/contactus', function () {return view('landing.contact');})->name('contact');
 
 //Client Routes BackEnd
 Route::post('/searchroute', [CustomerDash::class, 'SearchRoute'])->name('searchRoute');
+Route::get('/getRoute', [CustomerDash::class, 'GetRoute'])->name('getRoute');
+Route::post('/reserve', [CustomerDash::class, 'Reserve'])->name('reserve');
 
 //Admin Routes Frontend
 Route::get('/admin/login', function () {return view('admin.login');})->name('loginAdmin');

@@ -174,28 +174,8 @@
                 <li class="nav-item {{$active === 'dashboard' ? 'active-link' : ''}}">
                     <a class="nav-link" href="{{route('adminDashboard')}}"> Dashboard </a>
                 </li>
-              
-                <li class="nav-item dropdown {{$active === 'booking' ? 'active-link' : ''}}">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Booking
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" href="agent-profile.html">
-                                <span>Reservations</span></a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item current-page" href="starter-page.html">
-                                <span>Available Seats</span></a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="client-list.html">
-                                <span>History</span>
-                            </a>
-                        </li>
-                        
-                    </ul>
+                <li class="nav-item {{$active === 'terminal' ? 'active-link' : ''}}">
+                    <a class="nav-link" href="{{route('adminTerminal')}}"> Booked Tickets </a>
                 </li>
                 <li class="nav-item {{$active === 'terminal' ? 'active-link' : ''}}">
                     <a class="nav-link" href="{{route('adminTerminal')}}"> Terminal List </a>
@@ -207,7 +187,7 @@
                     <a class="nav-link" href="{{route('adminRoute')}}"> Routes </a>
                 </li>
                 <li class="nav-item {{$active === 'customers' ? 'active-link' : ''}}">
-                    <a class="nav-link" href="clients.html"> Customer </a>
+                    <a class="nav-link" href="clients.html"> Feedbacks </a>
                 </li>
              
             </ul>

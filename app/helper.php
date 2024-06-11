@@ -12,3 +12,19 @@ function CodeGenerator($length) {
     
     return $randomString;
 }
+
+function timeFormat($time) {
+    list($hours, $minutes) = explode(':', $time);
+
+    $hours = (int)$hours;
+    $minutes = (int)$minutes;
+    $ampm = $hours >= 12 ? 'PM' : 'AM';
+
+    $hours = $hours % 12;
+    if ($hours == 0) {
+        $hours = 12;
+    }
+
+    $minutes = str_pad($minutes, 2, '0', STR_PAD_LEFT);
+    return "{$hours}:{$minutes} {$ampm}";
+}

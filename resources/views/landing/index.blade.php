@@ -24,7 +24,7 @@
   <!-- ***** Preloader End ***** -->
 
   <!-- ***** Header Area Start ***** -->
-  @include('landing.components.nav')
+  @include('landing.components.nav', ['active'=>'home'])
   <!-- ***** Header Area End ***** -->
 
   @php
@@ -112,10 +112,6 @@
                
               </div>
             </div>
-
-
-            
-            
           
           </div>
         </div>

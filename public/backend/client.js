@@ -112,3 +112,86 @@ function TimeFormat(time) {
     minutes = minutes.toString().padStart(2, '0');
     return `${hours}:${minutes} ${ampm}`;
 }
+
+
+const Booking = {
+    GetRoute: route => {
+      $.ajax({
+        type: "GET",
+        url: route,
+        dataType: "json",
+        success: res => {
+          AsText('routeCodeT', res.route.route_code );
+          AsText('busCodeT', res.route.bus_code);
+          AsText('busSeatsT', res.seats);
+          AsText('originT', res.route.origin);
+          AsText('destinationT', res.route.destination);
+          AsText('departureDateT', res.route.route_departure_date);
+          AsText('departureTimeT', TimeFormat(res.route.route_departure_time));
+          AsVal('route_id', res.route.route_id);
+        }, error: xhr => {
+          console.log(xhr. responseText);
+        }
+      })   
+    },
+    Reserve: route => {
+     
+      let validity = 0;
+
+      validity += CheckError('fname', 'fnameE');
+      validity += CheckError('surname', 'surnameE');
+      validity += CheckError('email', 'emailE');
+      validity += CheckError('contact', 'contactE');
+      validity += CheckError('tickets', 'ticketsE');
+
+      if(validity === 5){
+        alertify.confirm("Confirm Reservation", "Are you sure do you want to submit this reservation of tickets",
+        ()=>{
+          document.getElementById('mainLoader').style.display = 'flex';
+
+          $.ajax({
+           type: "POST",
+           url: route,
+           data: $('form#reserveSeats').serialize(),
+           success: res=>{
+            if(res.status === 'success'){
+              document.getElementById('mainLoader').style.display = 'none';
+              alertify.set('notifier', 'position', 'top-right');
+              alertify.success('Successfully Reserve Tickets');
+              document.getElementById('reserveClose').click();
+            }
+    
+           }, error: xhr=>{
+            console.log(xhr.responseText);
+           }
+          });
+        }, ()=>{
+          console.log('cancel');
+        })
+      }
+       
+    
+    }
+}
+
+function AsText(id, value){
+  document.getElementById(id).textContent = value;
+}
+
+function AsVal(id, value){
+  document.getElementById(id).value = value;
+}
+
+function CheckError(input, text){
+  const inp = document.getElementById(input);
+  const tex = document.getElementById(text);
+  if(inp.value === ''){
+    tex.style.display = '';
+    inp.classList.add('border', 'border-danger');
+    return 0;
+  }else{
+    tex.style.display = 'none';
+    inp.classList.remove('border', 'border-danger');
+    return 1;
+  }
+}
