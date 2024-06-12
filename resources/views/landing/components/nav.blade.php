@@ -12,8 +12,8 @@
               <li><a href="{{route('home')}}" class="{{$active==='home' ? 'active' : ''}}">Home</a></li>
               <li><a href="{{route('routes')}}" class="{{$active==='routes' ? 'active' : ''}}">Routes</a></li>
               <li><a href="{{route('booking')}}" class="{{$active==='booking' ? 'active' : ''}}">Booking</a></li>
-              <li><a href="{{route('contact')}}" class="{{$active==='home' ? 'active' : ''}}">Contact Us</a></li> 
-              <li><div class="main-white-button"><a href="#"><i class="fa fa-plus"></i> Reserve a seat </a></div></li> 
+              <li><a href="{{route('contact')}}" class="{{$active==='contact' ? 'active' : ''}}">Contact Us</a></li> 
+              <li><div class="main-white-button"><a href="{{route('routes')}}"><i class="fa fa-plus"></i> Reserve a seat </a></div></li> 
             </ul>        
             <a class='menu-trigger'>
                 <span>Menu</span>

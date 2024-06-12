@@ -195,3 +195,113 @@ function CheckError(input, text){
     return 1;
   }
 }
+
+function CheckErrorSearch(id){
+ const input = document.getElementById(id);
+ alertify.set('notifier', 'position', 'top-center');
+
+ if(input.value === ''){
+  alertify.error(id + ' search field is empty');
+  return 0;
+ }else{
+  return 1;
+ }
+}
+
+function SearchBooking(route){
+  let validity = 0;
+  
+  validity += CheckErrorSearch('FirstName');
+  validity += CheckErrorSearch('LastName');
+  validity += CheckErrorSearch('Contact');
+
+  if(validity== 3){
+    document.getElementById('mainLoader').style.display = 'flex';
+
+    $.ajax({
+      type: "POST",
+      url: route,
+      data: $('form#search-form').serialize(),
+      success: res=>{
+        document.getElementById('mainLoader').style.display = 'none';
+        if(res.status === 'success'){
+          const result = document.getElementById('bookResult');
+          const search = document.getElementById('searchResult');
+          result.innerHTML = '';
+          res.book.forEach(data =>{
+             result.innerHTML += `  <div class="col-lg-12">
+             <div class="listing-item">
+            
+               <div class="right-content align-self-center w-100 d-flex">
+               <div class="w-50">
+                 <a href="#"><h4>Booking Code: ${data.booking_code}</h4></a>
+                 <h6>by: ${data.booking_firstname} ${data.booking_surname}(${data.booking_contact})</h6>
+             
+                 
+                 <span class="price"><div class="icon"><img src="landing/assets/images/listing-icon-01.png" alt=""></div> ${data.origin} - ${data.destination}</span>
+                 <span class="details">Seat Reserved: <em>${data.booking_seats}</em></span>
+               </div>
+                 <ul class="info w-50">
+                   <br>
+                   <li>Route Code: ${data.route.route_code}</li>
+                   <li>Bus Code: ${data.bus}</li>
+                   <li>Departure Date: ${data.route.route_departure_date}</li>
+                   <li>Departute Time: ${TimeFormat(data.route.route_departure_time)}</li>
+                 </ul>
+                
+               </div>
+             </div>
+           </div>`;
+          });
+
+          search.style.display = '';
+          window.location.href = '#searchResult'
+        }else{
+          alertify.set('notifier','position', 'top-right');
+          alertify.error('We Found nothing in the database');
+          search.style.display = 'none';
+        }
+      }, error: xhr =>{
+        console.log(xhr.responseText);
+      }
+    });
+  }
+}
+
+function SubmitFeedBack(route){
+  let validity = 0;
+
+  validity += CheckError('name', 'nameE');
+  validity += CheckError('surname', 'surnameE');
+  validity += CheckError('email', 'emailE');
+  validity += CheckError('message', 'messageE');
+
+  if(validity === 4){
+    document.getElementById('mainLoader').style.display = 'flex';
+
+    $.ajax({
+      type: "POST",
+      url:route,
+      data: $('form#contact').serialize(),
+      success: res=>{
+        if(res.status=== 'success'){
+          document.getElementById('mainLoader').style.display = 'none';
+          alertify.set('notifier', 'position', 'top-right');
+          alertify.success('Feedback Sent');
+          ClearInp('name');
+          ClearInp('surname');
+          ClearInp('email');
+          ClearInp('message');
+        }
+      }, error: xhr=>{
+        console.log(xhr.responseText);
+      }
+    });
+  }
+}
+
+
+function ClearInp(id){
+document.getElementById(id).value = '';
+
+}

@@ -38,4 +38,12 @@ class Authenticate extends Controller
             return view('401');
         }
     }
+    
+    public function Booked(){
+        if(Session::has('admin_id')){
+            return view('admin.booked');
+        }else{
+            return view('401');
+        }
+    }
 }

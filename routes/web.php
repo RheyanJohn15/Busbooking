@@ -23,8 +23,10 @@ Route::get('/contactus', function () {return view('landing.contact');})->name('c
 
 //Client Routes BackEnd
 Route::post('/searchroute', [CustomerDash::class, 'SearchRoute'])->name('searchRoute');
+Route::post('/searchBooking', [CustomerDash::class, 'SearchBooking'])->name('searchBooking');
 Route::get('/getRoute', [CustomerDash::class, 'GetRoute'])->name('getRoute');
 Route::post('/reserve', [CustomerDash::class, 'Reserve'])->name('reserve');
+Route::post('/sendfeedback', [CustomerDash::class, 'SendFeedback'])->name('sendFeedback');
 
 //Admin Routes Frontend
 Route::get('/admin/login', function () {return view('admin.login');})->name('loginAdmin');
@@ -32,6 +34,7 @@ Route::get('/admin/dashboard', [Authenticate::class, 'Dashboard'])->name('adminD
 Route::get('/admin/terminal', [Authenticate::class, 'Terminal'])->name('adminTerminal');
 Route::get('/admin/buslist', [Authenticate::class, 'Bus'])->name('adminBus');
 Route::get('/admin/routes', [Authenticate::class, 'Route'])->name('adminRoute');
+Route::get('/admin/bookedlist', [Authenticate::class, 'Booked'])->name('adminBooked');
 
 
 //Admin Routes Backend

@@ -8,7 +8,7 @@
   </head>
 
 <body>
-
+  @include('admin.components.loading')
   <!-- ***** Preloader Start ***** -->
   <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
@@ -45,40 +45,43 @@
             <div class="row">
               <div class="col-lg-6">
                 <div id="map">
-                  <iframe src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="650px" frameborder="0" style="border:0" allowfullscreen></iframe>
+                  <iframe src="https://maps.google.com/maps?q=Bacolod+City,+Negros+Occidental,+Philippines&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="650px" frameborder="0" style="border:0" allowfullscreen></iframe>
+
                 </div>
               </div>
               <div class="col-lg-6 align-self-center">
-                <div class="alert alert-success" role="alert">
-                  A simple success alert—check it out!
-                </div>
-                <form id="contact" action="{{route('sendFeedback')}}" method="POST">
+                <form id="contact" method="POST">
                   @csrf
                   <div class="row">
                     <div class="col-lg-6">
                       <fieldset>
-                        <input type="name" name="name" id="name" placeholder="Name" autocomplete="on" required>
+                        <small id="nameE" style="display: none" class="text-danger">(This Field is Empty)</small>
+                        <input type="text" name="name" id="name" placeholder="Name" autocomplete="on" required>
                       </fieldset>
+                 
                     </div>
                     <div class="col-lg-6">
                       <fieldset>
-                        <input type="surname" name="surname" id="surname" placeholder="Surname" autocomplete="on" required>
+                        <small id="surnameE" style="display: none" class="text-danger">(This Field is Empty)</small>
+                        <input type="text" name="surname" id="surname" placeholder="Surname" autocomplete="on" required>
                       </fieldset>
                     </div>
                     <div class="col-lg-12">
                       <fieldset>
+                        <small id="emailE" style="display: none" class="text-danger">(This Field is Empty)</small>
                         <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email" required="">
                       </fieldset>
                     </div>
                     
                     <div class="col-lg-12">
                       <fieldset>
+                        <small id="messageE" style="display: none" class="text-danger">(This Field is Empty)</small>
                         <textarea name="message" type="text" class="form-control" id="message" placeholder="Message" required=""></textarea>  
                       </fieldset>
                     </div>
                     <div class="col-lg-12">
                       <fieldset>
-                        <button type="submit" id="form-submit" class="main-button "><i class="fa fa-paper-plane"></i> Send Message</button>
+                        <button type="button" onclick="SubmitFeedBack('{{route('sendFeedback')}}')" id="form-submit" class="main-button "><i class="fa fa-paper-plane"></i> Send Message</button>
                       </fieldset>
                     </div>
                 

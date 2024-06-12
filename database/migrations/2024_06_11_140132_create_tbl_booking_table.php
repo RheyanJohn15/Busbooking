@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('booking_email', 100);
             $table->string('booking_contact', 100);
             $table->integer('booking_seats');
+            $table->string('booking_code', 50);
             $table->integer('booking_status');
             $table->timestamps();
         });

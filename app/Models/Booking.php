@@ -17,6 +17,7 @@ class Booking extends Model
      'booking_email',
      'booking_contact',
      'booking_seats',
+     'booking_code',
      'booking_status',
     ];
 }
