@@ -32,14 +32,12 @@
                         <a class="dropdown-toggle d-flex align-items-center user-settings" href="#!" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="d-none d-md-block">{{$user->admin_name}}</span>
-                            <img src="{{asset('assets/images/user.png')}}" class="img-3x m-2 me-0 rounded-5" alt="Bootstrap Gallery" />
+                            <img src="{{$user->admin_pic === 'none' ? asset('admin/placeholder.jfif') : asset('admin/'. $user->admin_pic)}}" class="img-3x m-2 me-0 rounded-5" alt="Bootstrap Gallery" />
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-sm shadow-sm gap-3" style="">
-                            <a class="dropdown-item d-flex align-items-center py-2" href="agent-profile.html"><i
+                            <a class="dropdown-item d-flex align-items-center py-2" href="{{route('userAccount')}}"><i
                                     class="icon-smile fs-4 me-3"></i>User Profile</a>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="account-settings.html"><i
-                                    class="icon-settings fs-4 me-3"></i>Account
-                                Settings</a>
+                          
                             <button class="dropdown-item d-flex align-items-center py-2" onclick="Admin.Logout('{{route('adminLogout')}}', '{{route('loginAdmin')}}')"><i
                                     class="icon-log-out fs-4 me-3"></i>Logout</button>
                         </div>
@@ -96,8 +94,8 @@
                 <li class="nav-item {{$active === 'routes' ? 'active-link' : ''}}">
                     <a class="nav-link" href="{{route('adminRoute')}}"> Routes </a>
                 </li>
-                <li class="nav-item {{$active === 'customers' ? 'active-link' : ''}}">
-                    <a class="nav-link" href="clients.html"> Feedbacks </a>
+                <li class="nav-item {{$active === 'feedback' ? 'active-link' : ''}}">
+                    <a class="nav-link" href="{{route('feedback')}}"> Feedbacks </a>
                 </li>
              
             </ul>

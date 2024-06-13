@@ -28,3 +28,12 @@ function Login(route, dashboard){
       }
     });
 }
+
+function ShowPass(id){
+  const pass = document.getElementById(id);
+  if(pass.type === 'text'){
+    pass.type = 'password';
+  }else{
+    pass.type = 'text';
+  }
+}

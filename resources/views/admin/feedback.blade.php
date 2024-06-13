@@ -3,7 +3,7 @@
 <html lang="en">
 
 	<head>
-		@include('admin.components.header', ['title'=>'Booking List'])
+		@include('admin.components.header', ['title'=>'Feedback'])
 	</head>
 
 	<body>
@@ -14,7 +14,7 @@
 			<!-- App container starts -->
 			<div class="app-container">
 
-				@include('admin.components.nav', ['active'=>'booked'])
+				@include('admin.components.nav', ['active'=>'feedback'])
 
 				<!-- App body starts -->
 				<div class="app-body">
@@ -30,9 +30,9 @@
 								<ol class="breadcrumb mb-3">
 									<li class="breadcrumb-item">
 										<i class="icon-house_siding lh-1"></i>
-										<a href="{{route('adminDashboard')}}" class="text-decoration-none">Dashboard</a>
+										<a href="{{route('adminDashboard')}}" class="text-decoration-none">Feed</a>
 									</li>
-									<li class="breadcrumb-item text-light">Booked List</li>
+									<li class="breadcrumb-item text-light">FeedBack</li>
 								</ol>
 								<!-- Breadcrumb end -->
 							</div>
@@ -52,16 +52,14 @@
                                                 <div class="card mb-2">
                                                     <div class="card-body">
                                                         <div class="table-responsive">
-                                                            <table id="bookedList" class="table table-striped table-hover table-bordered align-middle m-0">
+                                                            <table id="feedback" class="table table-striped table-hover table-bordered align-middle m-0">
                                                                 <thead>
                                                                     <tr class="thead-dark">
                                                                         
-                                                                        <th>Booking Code</th>
                                                                         <th>Full Name</th>
 																		<th>Email</th>
-                                                                        <th>Contact</th>
-                                                                        <th>Reserve Seats</th>
-                                                                        
+                                                                        <th>Message</th>
+                                                                     
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -96,7 +94,7 @@
 	@include('admin.components.scripts')
 	<script>
         window.onload = ()=>{
-            LoadBookedList("{{route('getBookedList')}}")
+            LoadFeedback("{{route('getFeedback')}}")
         }
     </script>
 	</body>

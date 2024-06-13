@@ -20,3 +20,13 @@
 <script src="{{asset('assets/vendor/datatables/buttons/buttons.html5.min.js')}}"></script>
 <script src="{{asset('assets/vendor/datatables/buttons/buttons.print.min.js')}}"></script>
 <script src="{{asset('assets/vendor/datatables/buttons/buttons.colVis.min.js')}}"></script>
+
+	<!-- Moment JS -->
+    <script src="{{asset('assets/js/moment.min.js')}}"></script>
+
+    <!-- Date Range JS -->
+    <script src="{{asset('assets/vendor/daterange/daterange.js')}}"></script>
+    <script src="{{asset('assets/vendor/daterange/custom-daterange.js')}}"></script>
+
+    <!-- Dropzone JS -->
+    <script src="{{asset('assets/vendor/dropzone/dropzone.min.js')}}"></script>

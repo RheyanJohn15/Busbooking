@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\Terminal;
 use App\Models\Bus;
 use App\Models\Routes;
-
-
+use App\Models\Booking;
+use App\Models\Admin;
+use App\Models\Feedback;
+use Illuminate\Support\Facades\Hash;
 class AdminDashboard extends Controller
 {
     public function AddTerminal(Request $req){
@@ -129,5 +131,68 @@ class AdminDashboard extends Controller
     }
     
     return response()->json(['route'=>$route]);
+   }
+
+   public function GetBookedList(){
+    $booking = Booking::where('booking_status', 1)->get();
+    foreach($booking as $book){
+        $fullname = $book->booking_firstname . " ". $book->booking_surname;
+        $book->fullname = $fullname;
+    }
+    return response()->json(['book'=>$booking]);
+   }
+
+   public function GetFeedback(){
+    $feedback = Feedback::all();
+    foreach($feedback as $fb){
+        $fullname = $fb->fb_fname . " ". $fb->fb_surname;
+        $fb->fullname = $fullname;
+    }
+    return response()->json(['feedback'=>$feedback]);
+   }
+
+   public function UpdateGeneral(Request $req){
+     $user = Admin::where('admin_id', $req->user_id)->first();
+
+     $user->update([
+        'admin_name'=>$req->fullname,
+        'admin_username'=>$req->username,
+     ]);
+
+     return response()->json(['status'=>'success']);
+   }
+   public function UpdatePass(Request $req){
+    $user = Admin::where('admin_id', $req->user_id)->first();
+    
+    if(Hash::check($req->currentPass, $user->admin_password)){
+       if($req->newPass === $req->confirmPass){
+        $user->update([
+            'admin_password'=>Hash::make($req->newPass),
+        ]);
+        $status = 'success';
+       }else{
+        $status = 'not match';
+       }
+    }else{
+        $status = 'failed';
+    }
+
+    return response()->json(['status'=>$status]);
+   }
+   public function UpdatePic(Request $req){
+    $user = Admin::where('admin_id', $req->user_id)->first();
+    $image = $req->file('profilePic');
+
+    if(!in_array($image->getClientOriginalExtension(), ['jpg', 'jpeg', 'png'])){
+        return response()->json(['status'=>'not valid']);
+    }
+    $filename = 'Admin'. $user->admin_id.".".$image->getClientOriginalExtension();
+    $image->move(public_path('admin'), $filename);
+
+    $user->update([
+        'admin_pic'=>$filename,
+    ]);
+
+    return response()->json(['status'=>'success']);
    }
 }

@@ -528,6 +528,128 @@ const Admin = {
     }
     );
     }
+  },
+
+  UserProfile:{
+    ChangeTab: tab =>{
+      const general = document.getElementById('generalUpdate');
+      const changePass = document.getElementById('changePassUpdate');
+      const uploadPic = document.getElementById('uploadPicUpdate');
+
+      if(tab === 'general'){
+        changePass.style.display = 'none';
+        uploadPic.style.display = 'none';
+        general.style.display = '';
+      }else if( tab==='changePass'){
+        changePass.style.display = '';
+        uploadPic.style.display = 'none';
+        general.style.display = 'none';
+      }else{
+        changePass.style.display = 'none';
+        uploadPic.style.display = '';
+        general.style.display = 'none';
+      }
+    },
+
+   UpdateGeneral: route=>{
+    let validity = 0;
+    validity += CheckError('fullName', 'fullNameE');
+    validity += CheckError('username', 'usernameE');
+
+    if(validity == 2){
+
+      document.getElementById('mainLoader').style.display = 'flex';
+      $.ajax({
+        type:"POST",
+        url: route,
+        data: $('form#generalForm').serialize(),
+        success: res=>{
+         if(res.status === 'success'){
+          document.getElementById('mainLoader').style.display = 'none';
+          alertify.set('notifier', 'position', 'top-right');
+          alertify.success('User Info is Updated Successfully');
+         }
+        }, error: xhr=>{
+          console.log(xhr.responseText);
+        }
+      });
+    }
+
+
+   },
+   UpdatePassword: route=>{
+    let validity = 0;
+    validity += CheckError('currentPass', 'currentPassE');
+    validity += CheckError('newPass', 'newPassE');
+    validity += CheckError('confirmPass', 'confirmPassE');
+    if(validity == 3){
+
+      document.getElementById('mainLoader').style.display = 'flex';
+      $.ajax({
+        type:"POST",
+        url: route,
+        data: $('form#changePassword').serialize(),
+        success: res=>{
+          document.getElementById('mainLoader').style.display = 'none';
+          alertify.set('notifier', 'position', 'top-right');
+         if(res.status === 'success'){
+          alertify.success('Password is Updated Successfully');
+         }else if(res.status === 'failed'){
+          alertify.error('Current Password Does not Match');
+         }else{
+          alertify.error('New password does not match');
+         }
+        }, error: xhr=>{
+          console.log(xhr.responseText);
+        }
+      });
+    }
+
+   },
+   UpdatePic: route=>{
+
+    const file = document.getElementById('formFile');
+    if(file.files.length === 0){
+      alertify.alert('No file selected', 'Please select an image before clicking upload');
+    }else{
+      document.getElementById('mainLoader').style.display = 'flex';
+      var formData = new FormData($('#uploadProfilePic')[0]);
+      $.ajax({
+        type:"POST",
+        url: route,
+        data: formData,
+        processData: false,
+        contentType:false,
+        success: res=>{
+          document.getElementById('mainLoader').style.display = 'none';
+          alertify.set('notifier', 'position', 'top-right');
+         if(res.status === 'success'){
+          
+          alertify.success('User Profile Picture is Updated Successfully');
+         }else{
+          alertify.error('Picture must be Png, JPG or JPEG');
+         }
+        }, error: xhr=>{
+          console.log(xhr.responseText);
+        }
+      });
+    }
+    
+   }
+  }
+}
+function CheckError(inp, err){
+  const input = document.getElementById(inp);
+  const errs = document.getElementById(err);
+
+  if(input.value === ''){
+    input.classList.add('border', 'border-danger');
+    errs.style.display = '';
+    return 0;
+  }else{
+    input.classList.remove('border', 'border-danger');
+    errs.style.display = 'none';
+    return 1;
   }
 }
 
@@ -686,4 +808,97 @@ function LoadRoute(route, update){
 }
 function AssVal(id, value){
   document.getElementById(id).value = value;
+}
+
+
+function LoadBookedList(route){
+  $.ajax({
+    type: "GET",
+    url: route,
+    dataType: "json",
+    success: res => {
+      if (!$.fn.DataTable.isDataTable('#bookedList')) {
+        // Initialize the DataTable for the first time
+        table = $("#bookedList").DataTable({
+          data: res.book,
+          
+          columns: [
+            { title: "Booking Code", data: "booking_code" },
+            { title: "Full Name", data: "fullname" },
+            { title: "Email", data: "booking_email" },
+            { title: "Contact", data: "booking_contact" },
+            { title: "Reserve Seats", data: "booking_seats" },
+           
+          ],
+          lengthMenu: [
+            [5, 10, 25, 50],
+            [5, 10, 25, 50, "All"],
+          ],
+          language: {
+            lengthMenu: "Display _MENU_ Records Per Page",
+            info: "Showing Page _PAGE_ of _PAGES_",
+          },
+          autoWidth: true,     // Enable auto width adjustment
+          scrollX: false,      // Disable horizontal scrolling
+          responsive: true,   
+        });
+      } else {
+        // Update the existing DataTable with new data
+        table.clear().rows.add(res.book).draw();
+      }
+    },
+    error: xhr => {
+      console.log(xhr.responseText);
+    }
+  });
+}
+
+document.getElementById('formFile').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+          const img = document.getElementById('profilePic');
+          img.src = e.target.result;
+      }
+      reader.readAsDataURL(file);
+  }
+});
+
+function LoadFeedback(route){
+  $.ajax({
+    type: "GET",
+    url: route,
+    dataType: "json",
+    success: res => {
+      if (!$.fn.DataTable.isDataTable('#feedback')) {
+        // Initialize the DataTable for the first time
+        table = $("#feedback").DataTable({
+          data: res.feedback,
+          columns: [
+            { title: "Full Name", data: "fullname" },
+            { title: "Email", data: "fb_email" },
+            { title: "Message", data: "fb_message" },
+          ],
+          lengthMenu: [
+            [5, 10, 25, 50],
+            [5, 10, 25, 50, "All"],
+          ],
+          language: {
+            lengthMenu: "Display _MENU_ Records Per Page",
+            info: "Showing Page _PAGE_ of _PAGES_",
+          },
+          autoWidth: true,     // Enable auto width adjustment
+          scrollX: false,      // Disable horizontal scrolling
+          responsive: true,   
+        });
+      } else {
+        // Update the existing DataTable with new data
+        table.clear().rows.add(res.feedback).draw();
+      }
+    },
+    error: xhr => {
+      console.log(xhr.responseText);
+    }
+  });
 }

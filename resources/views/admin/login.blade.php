@@ -29,18 +29,13 @@
 								<div class="mb-3">
 									<label class="form-label">Password</label>
 									<div class="input-group">
-										<input type="password" class="form-control" name="password" placeholder="Enter password" />
-										<a href="#" class="input-group-text">
+										<input type="password" class="form-control" id="password" name="password" placeholder="Enter password" />
+										<a href="#" onclick="ShowPass('password')" class="input-group-text">
 											<i class="icon-eye"></i>
 										</a>
 									</div>
 								</div>
-								<div class="d-flex align-items-center justify-content-between">
-									<div class="form-check m-0">
-										<input class="form-check-input" type="checkbox" value="" id="rememberPassword" />
-										<label class="form-check-label" for="rememberPassword">Remember</label>
-									</div>
-								</div>
+								
 								<div id="errorBox">
 
 								</div>

@@ -27,7 +27,8 @@
 		<link rel="stylesheet" href="{{asset('assets/vendor/datatables/dataTables.bs5.css')}}" />
 		<link rel="stylesheet" href="{{asset('assets/vendor/datatables/dataTables.bs5-custom.css')}}" />
 		<link rel="stylesheet" href="{{asset('assets/vendor/datatables/buttons/dataTables.bs5-custom.css')}}" />
-
+		<link rel="stylesheet" href="{{asset('assets/vendor/dropzone/dropzone.min.css')}}" />
+		<link rel="stylesheet" href="{{asset('assets/vendor/daterange/daterange.css')}}" />
 		<style>
 			select option {
   background-color: #666666; /* Blue background for options */
